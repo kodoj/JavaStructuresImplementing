@@ -35,6 +35,7 @@ public class Stack<E> {
         }
     }
 
+
     public E peek() {
         if (currentSize < 1) {
             throw new StackUnderflow();
@@ -47,5 +48,10 @@ public class Stack<E> {
 
     public int length() {
         return length;
+    }
+
+
+    public int freeSpace() {
+        return length - currentSize;
     }
 }
