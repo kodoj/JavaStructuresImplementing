@@ -38,4 +38,13 @@ public class FIFOQueueTest {
         fifoQueue.enqueue(word);
         assertEquals(word, fifoQueue.peek());
     }
+
+    @Test
+    void queueSizeShouldReturnTwo() {
+        FIFOQueue fifoQueue = new FIFOQueue();
+        fifoQueue.enqueue("hej");
+        fifoQueue.enqueue("hmm");
+        int expectedResult = 2;
+        assertEquals(expectedResult, fifoQueue.queueSize());
+    }
 }

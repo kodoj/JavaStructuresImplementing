@@ -41,5 +41,14 @@ public class FIFOQueue {
     }
 
 
+    public String peek() {
+        String response = "";
+        if (length == 0) {
+            return response;
+        } else {
+            response = head.toString();
+        }
+        return response;
+    }
 
 }
