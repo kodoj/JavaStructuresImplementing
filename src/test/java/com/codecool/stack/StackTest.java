@@ -65,4 +65,10 @@ public class StackTest {
         assertEquals(expectedPeek, stack.peek());
     }
 
+    @Test
+    void ThrowStackUnderflowIfPopEmptyStack() {
+        Stack<Integer> stack = new Stack<>(5);
+        assertThrows(StackUnderflow.class, () -> stack.pop());
+    }
+
 }
