@@ -1,6 +1,6 @@
 package com.codecool.queue;
 
-public class FIFOQueue {
+public class CustomQueue {
 
     private Node head;
     private Node tail;
@@ -69,8 +69,22 @@ public class FIFOQueue {
         String response = "";
         if (isEmpty()) {
             return response;
-        } else {
+        }else if (length == 1){
             response = head.toString();
+        } else {
+            Node current = head;
+            Node highestPriorityNode = current;
+            int currentPriority = current.priority;
+
+            for (int i = 1; i < length; i++) {
+                current = current.next;
+                if(current.priority > currentPriority) {
+                    highestPriorityNode = current;
+                    currentPriority = current.priority;
+                }
+            }
+
+            response = highestPriorityNode.toString();
         }
         return response;
     }
