@@ -2,10 +2,14 @@ package com.codecool.linkedList;
 
 public class MyLinkedList {
     Node head;
+    Node last;
+    int length;
 
     public void add(int data) {
         if(head == null) {
             head = new Node(data);
+            last = head;
+            length++;
             return;
         }
         Node current = head;
@@ -13,6 +17,8 @@ public class MyLinkedList {
             current = current.next;
         }
         current.next = new Node(data);
+        last = current.next;
+        length++;
     }
 
 
@@ -25,9 +31,11 @@ public class MyLinkedList {
         if (head.data == data) {
             if (current.next != null) {
                 head = current.next;
+                length--;
                 return;
             } else {
                 head = null;
+                length = 0;
                 return;
             }
         }
@@ -35,6 +43,7 @@ public class MyLinkedList {
         while (current.next != null) {
             if (current.next.data == data) {
                 current.next = current.next.next;
+                length--;
                 return;
             }
             current = current.next;

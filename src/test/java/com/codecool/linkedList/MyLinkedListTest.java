@@ -31,4 +31,30 @@ public class MyLinkedListTest {
         assertEquals(result, myLinkedList.toString());
     }
 
+    @Test
+    void testRemoveFromHead() {
+        String result = "1 2 3 4";
+        myLinkedList.remove(0);
+        assertEquals(result, myLinkedList.toString());
+    }
+
+    @Test
+    void removeLastElement() {
+        String result = "0 1 2 3";
+        myLinkedList.remove(4);
+        assertEquals(result, myLinkedList.toString());
+    }
+
+    @Test
+    void lastWorks() {
+        String result = "4";
+        assertEquals(result, myLinkedList.last.toString());
+    }
+
+    @Test
+    void lengthWorks() {
+        int result = 5;
+        assertEquals(result, myLinkedList.length);
+    }
+
 }
