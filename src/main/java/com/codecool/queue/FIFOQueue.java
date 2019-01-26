@@ -51,4 +51,9 @@ public class FIFOQueue {
         return response;
     }
 
+
+    public int queueSize() {
+        return length;
+    }
+
 }

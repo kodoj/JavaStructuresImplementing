@@ -47,4 +47,27 @@ public class FIFOQueueTest {
         int expectedResult = 2;
         assertEquals(expectedResult, fifoQueue.queueSize());
     }
+
+    @Test
+    void queueSizeShouldReturnOneAfterDequeue() {
+        FIFOQueue fifoQueue = new FIFOQueue();
+        fifoQueue.enqueue("hej");
+        fifoQueue.enqueue("hmm");
+        fifoQueue.dequeue();
+        int expectedResult = 1;
+        assertEquals(expectedResult, fifoQueue.queueSize());
+    }
+
+    @Test
+    void trueIfEmpty() {
+        FIFOQueue fifoQueue = new FIFOQueue();
+        assertTrue(fifoQueue.isEmpty());
+    }
+
+    @Test
+    void falseIfNotEmpty() {
+        FIFOQueue fifoQueue = new FIFOQueue();
+        fifoQueue.enqueue("hmm");
+        assertFalse(fifoQueue.isEmpty());
+    }
 }
