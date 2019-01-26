@@ -88,4 +88,17 @@ public class CustomQueueTest {
         customQueue.enqueue(word, 2);
         assertEquals(word, customQueue.peek());
     }
+
+    @Test
+    void dequeueWithMultipleItemsAndMultiplePriorityLevels() {
+        CustomQueue customQueue = new CustomQueue();
+        String word = "output";
+        customQueue.enqueue("firstItem");
+        customQueue.enqueue("hola", 3);
+        customQueue.enqueue("ola", 4);
+        customQueue.enqueue("pola", 5);
+        customQueue.enqueue("cola");
+        customQueue.enqueue(word, 10);
+        assertEquals(word, customQueue.dequeue());
+    }
 }
