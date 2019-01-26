@@ -7,7 +7,7 @@ public class FIFOQueue {
     private int length;
 
     public void enqueue(String data) {
-        if(length == 0) {
+        if(isEmpty()) {
             head = new Node(data);
             tail = head;
             length++;
@@ -26,9 +26,9 @@ public class FIFOQueue {
 
     public String dequeue() {
         String response = "";
-        if(length == 0) {
+        if(isEmpty()) {
             return response;
-        } else if (length == 1){
+        } else if (queueSize() == 1){
             response = head.toString();
             head = null;
         } else {
@@ -43,7 +43,7 @@ public class FIFOQueue {
 
     public String peek() {
         String response = "";
-        if (length == 0) {
+        if (isEmpty()) {
             return response;
         } else {
             response = head.toString();
@@ -54,6 +54,15 @@ public class FIFOQueue {
 
     public int queueSize() {
         return length;
+    }
+
+
+    public boolean isEmpty() {
+        if (queueSize() == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
