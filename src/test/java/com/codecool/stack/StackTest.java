@@ -71,4 +71,12 @@ public class StackTest {
         assertThrows(StackUnderflow.class, () -> stack.pop());
     }
 
+    @Test
+    void checkHowManyItemsCanBePushedBeforeFullStack() {
+        Stack<Integer> stack = new Stack<>(5);
+        stack.push(10);
+        int expectedResult = 4;
+        assertEquals(expectedResult, stack.freeSpace());
+    }
+
 }
