@@ -25,16 +25,24 @@ public class Stack<E> {
 
 
     public E pop() {
-        E result = array[currentSize - 1];
-        array[currentSize - 1] = null;
-        currentSize--;
-        return result;
+        if (currentSize < 1) {
+            throw new StackUnderflow();
+        } else {
+            E result = array[currentSize - 1];
+            array[currentSize - 1] = null;
+            currentSize--;
+            return result;
+        }
     }
-
 
     public E peek() {
-        return array[currentSize - 1];
+        if (currentSize < 1) {
+            throw new StackUnderflow();
+        } else {
+            return array[currentSize - 1];
+        }
     }
+
 
 
     public int length() {

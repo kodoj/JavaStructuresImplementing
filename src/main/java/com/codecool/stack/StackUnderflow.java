@@ -2,7 +2,7 @@ package com.codecool.stack;
 
 public class StackUnderflow extends RuntimeException {
 
-    private String message = "No more space in Stack";
+    private String message = "Stack is Empty!";
 
     public StackUnderflow() {
         System.out.println(message);
