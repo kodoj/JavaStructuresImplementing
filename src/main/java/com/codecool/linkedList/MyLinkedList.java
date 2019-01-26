@@ -58,6 +58,30 @@ public class MyLinkedList {
     }
 
 
+    public void insert(int indexWhereToPut, int data) {
+        if (head == null || indexWhereToPut > length) {
+            return;
+        } else if (indexWhereToPut == 0) {
+            Node newHead = new Node(data);
+            newHead.next = head;
+            head.previous = newHead;
+            head = newHead;
+            return;
+        }
+
+        Node current = head;
+        for (int j = 1; j < indexWhereToPut; j++) {
+            current = current.next;
+        }
+        Node newNode = new Node(data);
+        newNode.next = current.next;
+        current.next = newNode;
+        newNode.previous = current;
+        newNode.next.previous = newNode;
+        length++;
+    }
+
+
     public String toString() {
         String result = "";
         if(head == null) {

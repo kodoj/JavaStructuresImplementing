@@ -65,4 +65,18 @@ public class MyLinkedListTest {
         assertEquals(result, lastNode.toString());
     }
 
+    @Test
+    void insertNewNodeInTheMiddle() {
+        String result = "0 1 5 2 3 4";
+        myLinkedList.insert(2, 5);
+        assertEquals(result, myLinkedList.toString());
+    }
+
+    @Test
+    void insertingNewNodeToHead() {
+        String result = "5 0 1 2 3 4";
+        myLinkedList.insert(0, 5);
+        assertEquals(result, myLinkedList.toString());
+    }
+
 }
