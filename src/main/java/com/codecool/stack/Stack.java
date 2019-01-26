@@ -23,11 +23,17 @@ public class Stack<E> {
         currentSize++;
     }
 
+
     public E pop() {
         E result = array[currentSize - 1];
         array[currentSize - 1] = null;
         currentSize--;
         return result;
+    }
+
+
+    public E peek() {
+        return array[currentSize - 1];
     }
 
 
