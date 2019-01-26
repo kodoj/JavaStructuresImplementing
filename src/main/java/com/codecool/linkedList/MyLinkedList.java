@@ -17,6 +17,7 @@ public class MyLinkedList {
             current = current.next;
         }
         current.next = new Node(data);
+        current.next.previous = current;
         last = current.next;
         length++;
     }
@@ -35,6 +36,7 @@ public class MyLinkedList {
                 return;
             } else {
                 head = null;
+                last = null;
                 length = 0;
                 return;
             }
@@ -42,8 +44,13 @@ public class MyLinkedList {
 
         while (current.next != null) {
             if (current.next.data == data) {
-                current.next = current.next.next;
-                length--;
+                if(current.next.next != null) {
+                    current.next = current.next.next;
+                    length--;
+                } else {
+                    current.next = null;
+                    last = current;
+                }
                 return;
             }
             current = current.next;

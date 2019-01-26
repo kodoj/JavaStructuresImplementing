@@ -57,4 +57,12 @@ public class MyLinkedListTest {
         assertEquals(result, myLinkedList.length);
     }
 
+    @Test
+    void lastWorksAfterDeletingLastElement() {
+        String result = "3";
+        myLinkedList.remove(4);
+        Node lastNode = myLinkedList.last;
+        assertEquals(result, lastNode.toString());
+    }
+
 }
