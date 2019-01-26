@@ -6,22 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MyLinkedListTest {
 
-    private MyLinkedListTest myLinkedListTest;
+    private MyLinkedList myLinkedList;
 
     @BeforeEach
     void prepare() {
-        myLinkedListTest = new MyLinkedListTest();
-        myLinkedListTest.add(0);
-        myLinkedListTest.add(1);
-        myLinkedListTest.add(2);
-        myLinkedListTest.add(3);
-        myLinkedListTest.add(4);
+        myLinkedList = new MyLinkedList();
+        myLinkedList.add(0);
+        myLinkedList.add(1);
+        myLinkedList.add(2);
+        myLinkedList.add(3);
+        myLinkedList.add(4);
     }
 
     @Test
     void testAdd() {
         String result = "0 1 2 3 4";
-        assertEquals(result, myLinkedListTest.toString());
+        assertEquals(result, myLinkedList.toString());
     }
 
 }
