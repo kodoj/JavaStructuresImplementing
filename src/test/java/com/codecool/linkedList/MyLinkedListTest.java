@@ -24,4 +24,11 @@ public class MyLinkedListTest {
         assertEquals(result, myLinkedList.toString());
     }
 
+    @Test
+    void testRemoveFromMiddle() {
+        String result = "0 1 2 4";
+        myLinkedList.remove(3);
+        assertEquals(result, myLinkedList.toString());
+    }
+
 }

@@ -15,6 +15,33 @@ public class MyLinkedList {
         current.next = new Node(data);
     }
 
+
+    public void remove(int data) {
+        if(head == null) {
+            return;
+        }
+
+        Node current = head;
+        if (head.data == data) {
+            if (current.next != null) {
+                head = current.next;
+                return;
+            } else {
+                head = null;
+                return;
+            }
+        }
+
+        while (current.next != null) {
+            if (current.next.data == data) {
+                current.next = current.next.next;
+                return;
+            }
+            current = current.next;
+        }
+    }
+
+
     public String toString() {
         String result = "";
         if(head == null) {
