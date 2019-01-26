@@ -70,4 +70,13 @@ public class FIFOQueueTest {
         fifoQueue.enqueue("hmm");
         assertFalse(fifoQueue.isEmpty());
     }
+
+    @Test
+    void returnElementWithHighestPriority() {
+        FIFOQueue fifoQueue = new FIFOQueue();
+        String word = "secondItem";
+        fifoQueue.enqueue("firstItem");
+        fifoQueue.enqueue(word, 2);
+        assertEquals(word, fifoQueue.dequeue());
+    }
 }
