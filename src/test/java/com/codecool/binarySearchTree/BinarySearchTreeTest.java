@@ -10,4 +10,10 @@ public class BinarySearchTreeTest {
         BinarySearchTree binarySearchTree = new BinarySearchTree(10);
         assertNotNull(binarySearchTree);
     }
+
+    @Test
+    void checkIfBinaryTreeContainsRoot() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree(10);
+        assertTrue(binarySearchTree.contains(10));
+    }
 }
