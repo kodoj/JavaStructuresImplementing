@@ -23,4 +23,15 @@ public class BinarySearchTreeTest {
         binarySearchTree.insert(8);
         assertTrue(binarySearchTree.contains(8));
     }
+
+    @Test
+    void insertFewValuesAndChecksIfLastExists() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree(10);
+        binarySearchTree.insert(8);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(20);
+        binarySearchTree.insert(18);
+        binarySearchTree.insert(1);
+        assertTrue(binarySearchTree.contains(1));
+    }
 }
