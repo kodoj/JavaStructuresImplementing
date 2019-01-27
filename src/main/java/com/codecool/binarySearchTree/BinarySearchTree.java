@@ -15,6 +15,10 @@ public class BinarySearchTree {
 
 
     public boolean contains(int value) {
-
+        Node current = root;
+        if(current.value == value) {
+            return true;
+        }
+        else return false;
     }
 }

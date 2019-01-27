@@ -16,4 +16,11 @@ public class BinarySearchTreeTest {
         BinarySearchTree binarySearchTree = new BinarySearchTree(10);
         assertTrue(binarySearchTree.contains(10));
     }
+
+    @Test
+    void insertOneValueAndTrueIfBSTContainsIt() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree(10);
+        binarySearchTree.insert(8);
+        assertTrue(binarySearchTree.contains(8));
+    }
 }
