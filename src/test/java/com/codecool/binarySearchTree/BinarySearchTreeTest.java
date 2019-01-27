@@ -34,4 +34,12 @@ public class BinarySearchTreeTest {
         binarySearchTree.insert(1);
         assertTrue(binarySearchTree.contains(1));
     }
+
+    @Test
+    void containsRetrnFalseAfterElementIsDeleted() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree(10);
+        binarySearchTree.insert(8);
+        binarySearchTree.remove(8);
+        assertFalse(binarySearchTree.contains(8));
+    }
 }
