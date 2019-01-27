@@ -31,6 +31,45 @@ public class Node {
     }
 
 
+    public void deleteRecursive(Node current, int data) {
+        if(current.value == data) {
+            if (current.count > 1) {
+                current.count--;
+            } else {
+                if (current.left == null && current.right == null) {
+                    if(current.parent.left.equals(current)) {
+                        current.parent.left = null;
+                    } else {
+                        current.parent.right = null;
+                    }
+                } else {
+                    if (current.parent.left.equals(current)) {
+                        if(current.right != null) {
+                            current.parent.left = current.right;
+                            current.right.parent = current.parent;
+                        } else {
+                            current.parent.left = current.left;
+                            current.left.parent = current.parent;
+                        }
+                    } else {
+                        if(current.left != null) {
+                            current.parent.right = current.left;
+                            current.left.parent = current.parent;
+                        } else {
+                            current.parent.right = current.right;
+                            current.right.parent = current.parent;
+                        }
+                    }
+                }
+            }
+        } else if (current.value > data) {
+                deleteRecursive(current.left, data);
+        } else {
+                deleteRecursive(current.right, data);
+        }
+    }
+
+
     public static boolean searchRecursive(Node current, int data) {
         if(current.value == data) {
             return true;

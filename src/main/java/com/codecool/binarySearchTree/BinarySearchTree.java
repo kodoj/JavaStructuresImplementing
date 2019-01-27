@@ -32,6 +32,16 @@ public class BinarySearchTree {
     }
 
 
+    public void remove(int value) {
+        if (root.value == value) {
+            root = null;
+        } else {
+            root.deleteRecursive(root, value);  // static or by object? both doesn't look well
+        }
+
+    }
+
+
     public boolean contains(int value) {
         return searchRecursive(root, value);
     }
