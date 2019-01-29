@@ -30,4 +30,13 @@ public class MinHeapTest {
         int expectedResult = 11;
         assertEquals(expectedResult, minHeap.array[10]);
     }
+
+    @Test
+    void insertTwoValuesLowerShouldBeIndexZero() {
+        MinHeap minHeap = new MinHeap();
+        minHeap.insert(10);
+        minHeap.insert(2);
+        int expectedResult = 2;
+        assertEquals(expectedResult, minHeap.array[0]);
+    }
 }

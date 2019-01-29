@@ -17,6 +17,7 @@ public class MinHeap {
         }
         array[size] = value;
         size++;
+        bubbleUp();
     }
 
 
@@ -25,5 +26,27 @@ public class MinHeap {
         int[] newArray = new int[newArrayLength];
         System.arraycopy(array, 0, newArray, 0, size);
         array = newArray;
+    }
+
+
+    private void bubbleUp() {
+        boolean shuffled = false;
+
+        if (size > 1) {
+            shuffled = true;
+        }
+
+        while (shuffled) {
+            int parentIndex = (size - 1) / 2;
+            int actualIndex = size - 1;
+
+            if (array[actualIndex] < array[parentIndex]) {
+                int temp = array[parentIndex];
+                array[parentIndex] = array[actualIndex];
+                array[actualIndex] = temp;
+            } else {
+                shuffled = false;
+            }
+        }
     }
 }
