@@ -43,14 +43,15 @@ public class MinHeap {
             shuffled = true;
         }
 
+        int currentIndex = size - 1;
         while (shuffled) {
-            int parentIndex = (size - 1) / 2;
-            int actualIndex = size - 1;
+            int parentIndex = (currentIndex - 1) / 2;
 
-            if (array[actualIndex] < array[parentIndex]) {
+            if (array[currentIndex] < array[parentIndex]) {
                 int temp = array[parentIndex];
-                array[parentIndex] = array[actualIndex];
-                array[actualIndex] = temp;
+                array[parentIndex] = array[currentIndex];
+                array[currentIndex] = temp;
+                currentIndex = parentIndex;
             } else {
                 shuffled = false;
             }
@@ -75,21 +76,26 @@ public class MinHeap {
             int node1Index = (currentIndex * 2) + 1;
             int node2Index = (currentIndex * 2) + 2;
 
-            if (array[currentIndex] > array[node1Index]) {
-                if (array[node1Index] > array[node2Index]) {
-                    int temp = array[currentIndex];
-                    array[currentIndex] = array[node1Index];
-                    array[node1Index] = temp;
-                    currentIndex = node1Index;
-                } else {
-                    int temp = array[currentIndex];
-                    array[currentIndex] = array[node2Index];
-                    array[node2Index] = temp;
-                    currentIndex = node2Index;
+            if (node1Index >= size && node2Index >= size) {
+                shuffled = false;
+            } else if (node1Index < size && node2Index < size) {
+                int lowerValueIndex = array[node1Index] < array[node2Index]? node1Index : node2Index;
+                if (array[currentIndex] > array[lowerValueIndex]) {
+                    swap(currentIndex, lowerValueIndex);
+                    currentIndex = lowerValueIndex;
                 }
             } else {
+                if (array[currentIndex] > array[node1Index]) {
+                    swap(currentIndex, node1Index);
+                }
                 shuffled = false;
             }
         }
+    }
+
+    private void swap(int firstIndex, int secondIndex) {
+        int temp = array[firstIndex];
+        array[firstIndex] = array[secondIndex];
+        array[secondIndex] = temp;
     }
 }
