@@ -12,4 +12,11 @@ public class HashMapTest {
         String expectedResult = "[hey: whats up]";
         assertEquals(expectedResult, hashMap.toString());
     }
+
+    @Test
+    void hashedAShouldReturn1() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        int expectedResult = 1;
+        assertEquals(expectedResult, hashMap.getHashCode("A"));
+    }
 }
