@@ -4,15 +4,20 @@ import java.util.LinkedList;
 
 public class HashMap<K, V> {
     LinkedList<KeyValue>[] list;
+    int size = 50;
 
 
     public HashMap() {
-        list = new LinkedList[20];
+        list = new LinkedList[size];
     }
 
 
     public void put(K key, V value) {
         int hashCode = getHashCode(key);
+        int index = convertHashToIndex(hashCode);
+        LinkedList<KeyValue> newList = new LinkedList<>();
+        newList.add(new KeyValue(key, value));
+        list[index] = newList;
     }
 
 
@@ -24,10 +29,24 @@ public class HashMap<K, V> {
         return sum;
     }
 
-//    private void resize() {
-//        int newArrayLength = size + (int)(size * 0.5);
-//        int[] newArray = new int[newArrayLength];
-//        System.arraycopy(array, 0, newArray, 0, size);
-//        array = newArray;
-//    }
+
+    public int convertHashToIndex(int hash) {
+        int index = hash / size;
+        if (index > size - 1) {
+            return index % (size - 1);
+        } else {
+            return index;
+        }
+    }
+
+    @Override
+    public String toString() {
+        String answer = "";
+        for (int i = 0; i < list.length; i++) {
+            if(list[i] != null) {
+                answer += list[i] + ", ";
+            }
+        }
+        return answer;
+    }
 }

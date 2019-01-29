@@ -9,7 +9,7 @@ public class HashMapTest {
     void insertOneValueToHashMapAndCheckifItExists() {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("hey", "whats up");
-        String expectedResult = "[hey: whats up]";
+        String expectedResult = "[hey: whats up], ";
         assertEquals(expectedResult, hashMap.toString());
     }
 
@@ -18,5 +18,12 @@ public class HashMapTest {
         HashMap<String, String> hashMap = new HashMap<>();
         int expectedResult = 1;
         assertEquals(expectedResult, hashMap.getHashCode("A"));
+    }
+
+    @Test
+    void indexFromHashed1ShouldReturn0() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        int expectedResult = 0;
+        assertEquals(expectedResult, hashMap.convertHashToIndex(1));
     }
 }
