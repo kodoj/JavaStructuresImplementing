@@ -12,4 +12,22 @@ public class MinHeapTest {
         int expectedResult = 10;
         assertEquals(expectedResult, minHeap.array[0]);
     }
+
+    @Test
+    void heapShouldAutoResizeItselfIfYouPutMoreValuesThanActualSize() {
+        MinHeap minHeap = new MinHeap();
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(10);
+        minHeap.insert(11);
+        int expectedResult = 11;
+        assertEquals(expectedResult, minHeap.array[10]);
+    }
 }
