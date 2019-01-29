@@ -39,4 +39,13 @@ public class MinHeapTest {
         int expectedResult = 2;
         assertEquals(expectedResult, minHeap.array[0]);
     }
+
+    @Test
+    void retrieveFirstValue() {
+        MinHeap minHeap = new MinHeap();
+        minHeap.insert(10);
+        minHeap.insert(2);
+        int expectedValue = 2;
+        assertEquals(expectedValue, minHeap.get());
+    }
 }
