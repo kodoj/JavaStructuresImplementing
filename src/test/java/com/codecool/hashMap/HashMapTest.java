@@ -36,11 +36,19 @@ public class HashMapTest {
     }
 
     @Test
-    void updatePreviouslyInsertedItem() {
+    void updatePreviouslyInsertedElement() {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("hey", "whats up");
         hashMap.update("hey", "what's up man?");
         String expectedResult = "what's up man?";
         assertEquals(expectedResult, hashMap.get("hey"));
+    }
+
+    @Test
+    void deletePreviouslyInsertedElement() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("hey", "whats up");
+        hashMap.delete("hey");
+        assertNull(hashMap.get("hey"));
     }
 }

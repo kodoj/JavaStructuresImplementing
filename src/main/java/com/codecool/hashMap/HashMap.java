@@ -62,6 +62,22 @@ public class HashMap<K, V> {
     }
 
 
+    public void delete(K key) {
+        int hashCode = getHashCode(key);
+        int index = convertHashToIndex(hashCode);
+        if (list[index] != null) {
+            int tempIndex = 0;
+            for(KeyValue object : list[index]) {
+                if (object.getKey().equals(key)) {
+                    list[index].remove(tempIndex);
+                    break;
+                }
+                tempIndex++;
+            }
+        }
+    }
+
+
     public int getHashCode(K key) {
         int sum = 0;
         for (int i = 0; i < ((String) key).length(); i++) {
