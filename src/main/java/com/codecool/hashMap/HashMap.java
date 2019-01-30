@@ -78,6 +78,20 @@ public class HashMap<K, V> {
     }
 
 
+    public LinkedList<V> values() {
+        LinkedList<V> valuesList= new LinkedList<>();
+
+        for (LinkedList<KeyValue> insideList : list) {
+            if (insideList != null) {
+                for (KeyValue object : insideList) {
+                    valuesList.add((V)object.getValue());
+                }
+            }
+        }
+        return valuesList;
+    }
+
+
     public int getHashCode(K key) {
         int sum = 0;
         for (int i = 0; i < ((String) key).length(); i++) {

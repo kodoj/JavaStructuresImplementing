@@ -1,6 +1,9 @@
 package com.codecool.hashMap;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HashMapTest {
@@ -50,5 +53,20 @@ public class HashMapTest {
         hashMap.put("hey", "whats up");
         hashMap.delete("hey");
         assertNull(hashMap.get("hey"));
+    }
+
+    @Test
+    void iterateOverHashMap() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("hey", "whats up");
+        hashMap.put("halo", "wut?");
+        hashMap.put("Kris", "Kris here");
+        String expectedResult = "whats up, wut?, Kris here, ";
+        LinkedList<String> hashMapValues = hashMap.values();
+        String output = "";
+        for (String value : hashMapValues) {
+            output += value + ", ";
+        }
+        assertEquals(expectedResult, output);
     }
 }
