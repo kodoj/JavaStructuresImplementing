@@ -49,6 +49,19 @@ public class HashMap<K, V> {
     }
 
 
+    public void update(K key, V value) {
+        int hashCode = getHashCode(key);
+        int index = convertHashToIndex(hashCode);
+        if (list[index] != null) {
+            for(KeyValue object : list[index]) {
+                if (object.getKey().equals(key)) {
+                    object.setValue(value);
+                }
+            }
+        }
+    }
+
+
     public int getHashCode(K key) {
         int sum = 0;
         for (int i = 0; i < ((String) key).length(); i++) {

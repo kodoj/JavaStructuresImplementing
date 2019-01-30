@@ -34,4 +34,13 @@ public class HashMapTest {
         String expectedResult = "whats up";
         assertEquals(expectedResult, hashMap.get("hey"));
     }
+
+    @Test
+    void updatePreviouslyInsertedItem() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("hey", "whats up");
+        hashMap.update("hey", "what's up man?");
+        String expectedResult = "what's up man?";
+        assertEquals(expectedResult, hashMap.get("hey"));
+    }
 }
