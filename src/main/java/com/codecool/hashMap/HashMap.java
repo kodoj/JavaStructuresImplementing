@@ -1,5 +1,6 @@
 package com.codecool.hashMap;
 
+import java.security.Key;
 import java.util.LinkedList;
 
 public class HashMap<K, V> {
@@ -15,9 +16,36 @@ public class HashMap<K, V> {
     public void put(K key, V value) {
         int hashCode = getHashCode(key);
         int index = convertHashToIndex(hashCode);
-        LinkedList<KeyValue> newList = new LinkedList<>();
-        newList.add(new KeyValue(key, value));
-        list[index] = newList;
+        if (list[index] == null)  {
+            LinkedList<KeyValue> newList = new LinkedList<>();
+            newList.add(new KeyValue(key, value));
+            list[index] = newList;
+        } else {
+            KeyValue keyValueobject = new KeyValue(key, value);
+            for (int i = 0; i < list[index].size(); i++) {
+                if(list[index].contains(keyValueobject)) {
+                    return;
+                } else {
+                    list[index].add(keyValueobject);
+                }
+            }
+        }
+    }
+
+
+    public V get(K key) {
+        int hashCode = getHashCode(key);
+        int index = convertHashToIndex(hashCode);
+        if (list[index] == null) {
+            return null;
+        } else {
+            for(KeyValue object : list[index]) {
+                if (object.getKey().equals(key)) {
+                    return (V)object.getValue();
+                }
+            }
+            return null;
+        }
     }
 
 

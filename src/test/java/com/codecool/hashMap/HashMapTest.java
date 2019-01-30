@@ -26,4 +26,12 @@ public class HashMapTest {
         int expectedResult = 0;
         assertEquals(expectedResult, hashMap.convertHashToIndex(1));
     }
+
+    @Test
+    void getPreviouslyInsertedElement() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("hey", "whats up");
+        String expectedResult = "whats up";
+        assertEquals(expectedResult, hashMap.get("hey"));
+    }
 }
