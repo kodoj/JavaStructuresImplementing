@@ -56,7 +56,9 @@ public class AutoComplete {
                 return words;
             }
         }
-        words.add(baseChars);
+        if(current.isTerminating()) {
+            words.add(baseChars);
+        }
         recurrentWordSeeker(current, baseChars, words);
 
 
@@ -64,7 +66,15 @@ public class AutoComplete {
     }
 
     private void recurrentWordSeeker(TrieNode currentNode, String currentWord, List<String> words) {
-
+        int length = currentNode.children.size();
+        for (int i = 0; i < length; i++) {
+            currentWord = currentWord + currentNode.children.get(i).getData();
+            if(currentNode.children.get(i).isTerminating()) {
+                words.add(currentWord);
+            }
+            currentNode = currentNode.children.get(i);
+            recurrentWordSeeker(currentNode, currentWord, words);
+        }
     }
 
 
