@@ -13,6 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AutoCompleteTest {
 
+
+    @Test
+    void checkIfIsTerminatingIsMarkedProperly() {
+        AutoComplete ac = new AutoComplete();
+        ac.addWord("te");
+        TrieNode first = ac.root.children.get(0);
+        TrieNode second = first.children.get(0);
+        assertTrue(second.isTerminating());
+    }
+
     @Test
     void add_oneWord_fullSearch() {
         AutoComplete ac = new AutoComplete();
@@ -54,7 +64,7 @@ class AutoCompleteTest {
 
     @Test
     void add_lotsOfWords() throws IOException {
-        Path worldListPath = new File("assets/wordlist.txt").toPath();
+        Path worldListPath = new File("resources/wordlist.txt").toPath();
         List<String> wordList = Files.readAllLines(worldListPath);
         AutoComplete ac = new AutoComplete();
         for (String str : wordList) {
