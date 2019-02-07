@@ -21,8 +21,9 @@ public class AutoComplete {
             temp = wordToAdd.charAt(i);
             if(containsLetter(current.children, temp)) {
                 for (int j = 0; j < current.childCount; j++) {
-                    if(current.children.get(i).getData() == temp) {
-                        current = current.children.get(i);
+                    if(current.children.get(j).getData() == temp) {
+                        current = current.children.get(j);
+                        break;
                     }
                 }
             } else {
@@ -42,24 +43,25 @@ public class AutoComplete {
     public List<String> autoComplete(String baseChars) {
         List<String> words = new ArrayList<>();
         char temp;
-        TrieNode current = root;
+        TrieNode currentNode = root;
 
         for (int i = 0; i < baseChars.length(); i++) {
             temp = baseChars.charAt(i);
-            if(containsLetter(current.children, temp)) {
-                for (int j = 0; j < current.childCount; j++) {
-                    if(current.children.get(j).getData() == temp) {
-                        current = current.children.get(j);
+            if(containsLetter(currentNode.children, temp)) {
+                for (int j = 0; j < currentNode.childCount; j++) {
+                    if(currentNode.children.get(j).getData() == temp) {
+                        currentNode = currentNode.children.get(j);
+                        break;
                     }
                 }
             } else {
                 return words;
             }
         }
-        if(current.isTerminating()) {
+        if(currentNode.isTerminating()) {
             words.add(baseChars);
         }
-        recurrentWordSeeker(current, baseChars, words);
+        recurrentWordSeeker(currentNode, baseChars, words);
 
 
         return words;
@@ -67,13 +69,13 @@ public class AutoComplete {
 
     private void recurrentWordSeeker(TrieNode currentNode, String currentWord, List<String> words) {
         int length = currentNode.children.size();
+        String wordWithNextLetter;
         for (int i = 0; i < length; i++) {
-            currentWord = currentWord + currentNode.children.get(i).getData();
+            wordWithNextLetter = currentWord + currentNode.children.get(i).getData();
             if(currentNode.children.get(i).isTerminating()) {
-                words.add(currentWord);
+                words.add(wordWithNextLetter);
             }
-            currentNode = currentNode.children.get(i);
-            recurrentWordSeeker(currentNode, currentWord, words);
+            recurrentWordSeeker(currentNode.children.get(i), wordWithNextLetter, words);
         }
     }
 

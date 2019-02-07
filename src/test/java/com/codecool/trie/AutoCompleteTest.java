@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,20 +54,21 @@ class AutoCompleteTest {
         assertEquals(0, results.size());
     }
 
-    @Test
-    void add_oneWord_caseInsensitive() {
-        AutoComplete ac = new AutoComplete();
-        ac.addWord("aReallyLongWord");
+//    @Test
+//    void add_oneWord_caseInsensitive() {
+//        AutoComplete ac = new AutoComplete();
+//        ac.addWord("aReallyLongWord");
+//
+//        List<String> results = ac.autoComplete("AREALLY");
+//        List<String> expected = Arrays.asList("aReallyLongWord");
+//        assertIterableEquals(expected, results);
+//    }
 
-        List<String> results = ac.autoComplete("AREALLY");
-        List<String> expected = Arrays.asList("aReallyLongWord");
-        assertIterableEquals(expected, results);
-    }
-
     @Test
-    void add_lotsOfWords() throws IOException {
-        Path worldListPath = new File("resources/wordlist.txt").toPath();
-        List<String> wordList = Files.readAllLines(worldListPath);
+    void add_lotsOfWords() throws IOException, URISyntaxException {
+        Path wordListPath = Paths.get(getClass().getClassLoader()
+                .getResource("wordlist.txt").toURI());
+        List<String> wordList = Files.readAllLines(wordListPath);
         AutoComplete ac = new AutoComplete();
         for (String str : wordList) {
             ac.addWord(str);
