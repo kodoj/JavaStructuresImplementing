@@ -81,7 +81,25 @@ public class AutoComplete {
 
 
     public boolean removeWord(String wordToRemove) {
+        TrieNode currentNode = root;
+        char currentCharacter;
+        int wordToRemoveLength = wordToRemove.length();
 
+        for (int i = 0; i < wordToRemoveLength; i++) {
+            currentCharacter = wordToRemove.charAt(i);
+
+            for (int j = 0; j < currentNode.childCount; j++) {
+                if(currentNode.children.get(j).getData() == currentCharacter) {
+                    currentNode = currentNode.children.get(j);
+
+                    if(i == wordToRemoveLength - 1) {
+                        currentNode.setTerminating(false);
+                        return true;
+                    }
+                    break;
+                }
+            }
+        }
         return false;
     }
 
