@@ -1,8 +1,5 @@
 package com.codecool.spellchecker;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class HashFunction {
 
 
@@ -16,7 +13,7 @@ public class HashFunction {
         for (int i = 0; i < wordLength; i++) {
             tempChar = word.charAt(i);
             asciiValue = 1 + tempChar - 1;
-            hashValue += (hashValue * MULTIPLICANT + asciiValue) % arraySize;
+            hashValue = (hashValue * MULTIPLICANT + asciiValue) % arraySize;
         }
 
         return hashValue;

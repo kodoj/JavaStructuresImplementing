@@ -80,11 +80,12 @@ public class HashTable {
 
     private void resizeArray() {
         length = length + (length / 4);
+        currentWordsCounter = 0;
         List<String>[] newArray = (ArrayList<String>[]) new ArrayList[length];
         List<String> allCurrentWords = new ArrayList<>();
 
         for (List<String> list : wordlist) {
-            if(list.size() != 0) {
+            if(list != null) {
                 allCurrentWords.addAll(list);
             }
         }
