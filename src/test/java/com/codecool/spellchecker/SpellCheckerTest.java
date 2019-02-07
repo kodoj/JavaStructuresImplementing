@@ -28,7 +28,7 @@ public class SpellCheckerTest {
 
 
     @Test
-    void swappingReturnsOneSugestion() {
+    void swappingReturnsOneSuggestion() {
         List<String> input = new ArrayList<>();
         input.add("assetrion");
         when(hashTable.exist("assertion")).thenReturn(true);
@@ -53,7 +53,7 @@ public class SpellCheckerTest {
     }
 
     @Test
-    void iteratingOverAlphabetReturnsOneSugestion() {
+    void iteratingOverAlphabetReturnsOneSuggestion() {
         List<String> input = new ArrayList<>();
         input.add("assertin");
         when(hashTable.exist("assertion")).thenReturn(true);
@@ -76,7 +76,7 @@ public class SpellCheckerTest {
     }
 
     @Test
-    void deletingCharactersReturnsOneSugestion() {
+    void deletingCharactersReturnsOneSuggestion() {
         List<String> input = new ArrayList<>();
         input.add("assertiion");
         when(hashTable.exist("assertion")).thenReturn(true);
@@ -96,5 +96,57 @@ public class SpellCheckerTest {
         expectedResultList.add("assertion");
         expectedResultList.add("mentor");
         assertEquals(expectedResultList, spellChecker.deleteCharactersFromWord(input));
+    }
+
+    @Test
+    void swapCharactersWithAlphabetCharactersReturnsOneSuggestion() {
+        List<String> input = new ArrayList<>();
+        input.add("asseltion");
+        when(hashTable.exist("assertion")).thenReturn(true);
+        Set<String> expectedResultList = new HashSet<>();
+        expectedResultList.add("assertion");
+        assertEquals(expectedResultList, spellChecker.replacingEachCharacterInWordWithAlphabetCharacters(input));
+    }
+
+    @Test
+    void swapCharactersWithAlphabetCharactersReturnsFewSuggestions() {
+        List<String> input = new ArrayList<>();
+        input.add("zssertion");
+        input.add("mentop");
+        when(hashTable.exist("mentor")).thenReturn(true);
+        when(hashTable.exist("assertion")).thenReturn(true);
+        Set<String> expectedResultList = new HashSet<>();
+        expectedResultList.add("assertion");
+        expectedResultList.add("mentor");
+        assertEquals(expectedResultList, spellChecker.replacingEachCharacterInWordWithAlphabetCharacters(input));
+    }
+
+    @Test
+    void splitWordsReturnsTwoSuggestions() {
+        List<String> input = new ArrayList<>();
+        input.add("hellothere");
+        when(hashTable.exist("hello")).thenReturn(true);
+        when(hashTable.exist("there")).thenReturn(true);
+        Set<String> expectedResultList = new HashSet<>();
+        expectedResultList.add("hello");
+        expectedResultList.add("there");
+        assertEquals(expectedResultList, spellChecker.splitWordsAndCheckBothOfThem(input));
+    }
+
+    @Test
+    void splitWordsReturnsFewSuggestions() {
+        List<String> input = new ArrayList<>();
+        input.add("Whatsup");
+        input.add("howdo");
+        when(hashTable.exist("Whats")).thenReturn(true);
+        when(hashTable.exist("up")).thenReturn(true);
+        when(hashTable.exist("how")).thenReturn(true);
+        when(hashTable.exist("do")).thenReturn(true);
+        Set<String> expectedResultList = new HashSet<>();
+        expectedResultList.add("Whats");
+        expectedResultList.add("up");
+        expectedResultList.add("how");
+        expectedResultList.add("do");
+        assertEquals(expectedResultList, spellChecker.splitWordsAndCheckBothOfThem(input));
     }
 }

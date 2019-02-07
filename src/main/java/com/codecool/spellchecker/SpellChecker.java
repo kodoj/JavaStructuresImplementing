@@ -92,6 +92,50 @@ public class SpellChecker {
     }
 
 
+    public Set<String> replacingEachCharacterInWordWithAlphabetCharacters(List<String> input) {
+        Set<String> result = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        for(String currentWord : input) {
+
+            for (int i = 0; i < currentWord.length(); i++) {
+
+                for (int j = 97; j <= 122; j++) {
+
+                    sb.append(currentWord);
+                    sb.setCharAt(i, (char)j);
+
+                    existCheck(result, sb);
+
+                    sb.setLength(0);
+                }
+            }
+        }
+        return result;
+    }
+
+
+    public Set<String> splitWordsAndCheckBothOfThem(List<String> input) {
+        Set<String> result = new HashSet<>();
+        String word1;
+        String word2;
+
+        for(String currentWord : input) {
+
+            for (int i = 1; i < currentWord.length() - 1; i++) {
+                word1 = currentWord.substring(0, i);
+                word2 = currentWord.substring(i);
+
+                if(hashTable.exist(word1) && hashTable.exist(word2)) {
+                    result.add(word1);
+                    result.add(word2);
+                }
+            }
+        }
+        return result;
+    }
+
+
     private void existCheck(Set<String> result, StringBuilder sb) {
         if (hashTable.exist(sb.toString())) {
             result.add(sb.toString());
