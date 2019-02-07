@@ -1,7 +1,6 @@
 package com.codecool.spellchecker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HashTable {
@@ -46,15 +45,17 @@ public class HashTable {
     public boolean exist(String word) {
         int index = hashFunction.hashString(length, word);
         boolean expectedString = false;
+        List<String> currentList = wordlist[index];
 
-        while(!expectedString) {
-            if(wordlist[index].equals(word)) {
-                expectedString = true;
-            } else {
-                index++;
-                index %= length;
+        if(currentList != null) {
+            for (int i = 0; i < currentList.size(); i++) {
+                if(currentList.get(i).equals(word)) {
+                    expectedString = true;
+                    break;
+                }
             }
         }
+
         return expectedString;
     }
 
