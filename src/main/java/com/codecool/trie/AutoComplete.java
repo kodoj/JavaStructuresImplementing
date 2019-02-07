@@ -1,6 +1,7 @@
 package com.codecool.trie;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AutoComplete {
@@ -84,6 +85,8 @@ public class AutoComplete {
         TrieNode currentNode = root;
         char currentCharacter;
         int wordToRemoveLength = wordToRemove.length();
+        LinkedList<TrieNode> queueOfNodes = new LinkedList<>();
+        queueOfNodes.add(currentNode);
 
         for (int i = 0; i < wordToRemoveLength; i++) {
             currentCharacter = wordToRemove.charAt(i);
@@ -91,9 +94,11 @@ public class AutoComplete {
             for (int j = 0; j < currentNode.childCount; j++) {
                 if(currentNode.children.get(j).getData() == currentCharacter) {
                     currentNode = currentNode.children.get(j);
+                    queueOfNodes.add(currentNode);
 
                     if(i == wordToRemoveLength - 1) {
                         currentNode.setTerminating(false);
+                        deleteNodes(queueOfNodes);
                         return true;
                     }
                     break;
@@ -101,6 +106,24 @@ public class AutoComplete {
             }
         }
         return false;
+    }
+
+
+    private void deleteNodes(LinkedList<TrieNode> nodesQueue) {
+        TrieNode currentNode;
+        TrieNode parentNode;
+        boolean removed = true;
+
+        while(nodesQueue.size() > 1 && removed) {
+            currentNode = nodesQueue.pollLast();
+            if(currentNode.childCount == 0) {
+                parentNode = nodesQueue.getLast();
+                parentNode.children.remove(currentNode);
+                parentNode.childCount--;
+            } else {
+                removed = false;
+            }
+        }
     }
 
 
