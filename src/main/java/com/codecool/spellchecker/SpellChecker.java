@@ -11,22 +11,35 @@ public class SpellChecker {
         this.hashTable = hashTable;
     }
 
+
     public List<String> swappingEachAdjacentPairOfCharacters(List<String> input) {
-        int listLength = input.size();
-        char firstCharacter;
-        char secondCharacter;
         List<String> result = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        String tempString;
-        boolean wordIsDone;
+        int currentWordLength;
 
-        for (int i = 0; i < listLength; i++) {
-            tempString = input.get(i);
-            wordIsDone = false;
 
-            while(!wordIsDone) {
+        for (String currentWord : input) {
+            currentWordLength = currentWord.length();
 
+            if (currentWordLength < 2) {
+                continue;
+            }
+
+            for (int i = 0; i < currentWordLength - 1; i++) {
+                sb.append(currentWord);
+                sb.setCharAt(i+1, currentWord.charAt(i));
+                sb.setCharAt(i, currentWord.charAt(i+1));
+
+                if(hashTable.exist(sb.toString())) {
+                    result.add(sb.toString());
+                }
+
+                sb.setLength(0);
             }
         }
+        return result;
     }
+
+
+
 }
