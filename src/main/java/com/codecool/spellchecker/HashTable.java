@@ -6,31 +6,56 @@ import java.util.List;
 
 public class HashTable {
 
-    String[] wordlist;
+    List<String>[] wordlist;
     int length;
     int currentWordsCounter = 0;
     HashFunction hashFunction;
 
     public HashTable(int length) {
         this.length = length;
-        wordlist = new String[length];
+        wordlist = (ArrayList<String>[]) new ArrayList[length];
         hashFunction = new HashFunction();
     }
 
 
     public void add(String word) {
         int index = hashFunction.hashString(length, word);
-        boolean added = false;
-        while(!added) {
-            if (wordlist[index].equals("")) {
-                wordlist[index] = word;
-                currentWordsCounter++;
-                added = true;
+        if(wordlist[index] == null) {
+            wordlist[index] = new ArrayList<>();
+            wordlist[index].add(word);
+        } else {
+            wordlist[index].add(word);
+        }
+        currentWordsCounter++;
+        hashTableMaintenance();
+    }
+
+    private void add(String word, List<String>[] array) {
+        int index = hashFunction.hashString(array.length, word);
+        if(array[index] == null) {
+            array[index] = new ArrayList<>();
+            array[index].add(word);
+        } else {
+            array[index].add(word);
+        }
+        currentWordsCounter++;
+        hashTableMaintenance();
+    }
+
+
+    public boolean exist(String word) {
+        int index = hashFunction.hashString(length, word);
+        boolean expectedString = false;
+
+        while(!expectedString) {
+            if(wordlist[index].equals(word)) {
+                expectedString = true;
             } else {
                 index++;
+                index %= length;
             }
         }
-        hashTableMaintenance();
+        return expectedString;
     }
 
 
@@ -54,9 +79,22 @@ public class HashTable {
 
     private void resizeArray() {
         length = length + (length / 4);
-        String[] newArray = new String[length];
-        List<String> currentlyStoredWords = Arrays.asList(wordlist);
-        hashFunction.putListOfStringsToHashTable(currentlyStoredWords, newArray);
+        List<String>[] newArray = (ArrayList<String>[]) new ArrayList[length];
+        List<String> allCurrentWords = new ArrayList<>();
+
+        for (List<String> list : wordlist) {
+            if(list.size() != 0) {
+                allCurrentWords.addAll(list);
+            }
+        }
+        putListOfStringsToHashTable(allCurrentWords, newArray);
         wordlist = newArray;
+    }
+
+
+    public void putListOfStringsToHashTable(List<String> listOfAllWords, List<String>[] array) {
+        for (int i = 0; i < listOfAllWords.size(); i++) {
+            add(listOfAllWords.get(i), array);
+        }
     }
 }

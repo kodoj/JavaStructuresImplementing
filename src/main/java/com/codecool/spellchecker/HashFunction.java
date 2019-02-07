@@ -21,16 +21,4 @@ public class HashFunction {
 
         return hashValue;
     }
-
-
-    public void putListOfStringsToHashTable(List<String> wordList, String[] array) {
-        int index;
-        int arrayLength = array.length;
-        String currentWord;
-        for (int i = 0; i < wordList.size(); i++) {
-            currentWord = wordList.get(i);
-            index = hashString(arrayLength, currentWord);
-            array[index] = currentWord;
-        }
-    }
 }
