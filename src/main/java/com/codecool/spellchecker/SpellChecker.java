@@ -41,5 +41,35 @@ public class SpellChecker {
     }
 
 
+    public List<String> iterateAlphabetToEveryCharacter(List<String> input) {
+        List<String> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
 
+        for(String currentWord : input) {
+
+            for (int i = 0; i < currentWord.length(); i++) {
+
+                attachAlphabetCharactersToWord(result, sb, currentWord, i);
+
+                if (i+1 == currentWord.length()) {
+                    attachAlphabetCharactersToWord(result, sb, currentWord, i + 1);
+                }
+            }
+        }
+        return result;
+    }
+
+    private void attachAlphabetCharactersToWord(List<String> result, StringBuilder sb, String currentWord, int i) {
+        for (int j = 97; j <= 122; j++) {
+            sb.append(currentWord, 0, i);
+            sb.append((char)j);
+            sb.append(currentWord, i, currentWord.length());
+
+            if(hashTable.exist(sb.toString())) {
+                result.add(sb.toString());
+            }
+
+            sb.setLength(0);
+        }
+    }
 }
